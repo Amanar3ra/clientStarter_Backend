@@ -1,13 +1,19 @@
 import { ObjectID } from "bson";
 import Fastify from "fastify";
 import fastifyMongodb from "fastify-mongodb";
+import fastifyCors from '@fastify/cors';
 import { putSongSchema, postSongSchema } from './validator.js'
 
 const app = Fastify();
 
 //Connection with MongoDB
+app.register(fastifyCors, {
+    origin:"*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+});
+
 app.register(fastifyMongodb, {
-    url: "mongodb://localhost:27017/Assignment-1"
+    url: process.env.MONGO_URL
 });
 
 //Endpoint - To get all the data
@@ -94,10 +100,14 @@ app.delete('/:musicId', async (req, res) => {
 });
 
 //Listening on port 5000
-try {
-    await app.listen({ port: 5000 })
-    console.log("Server listening on Port: 5000");
-} catch (err) {
-    app.log.error(err)
-    process.exit(1)
-}
+// try {
+//     await app.listen({ port: 5000 })
+//     console.log("Server listening on Port: 5000");
+// } catch (err) {
+//     app.log.error(err)
+//     process.exit(1)
+// }
+
+app.listen({ port: process.env.PORT || 5000 }, () => {
+    console.log("Server running...");
+});
