@@ -9,7 +9,8 @@ dotenv.config();
 
 
 app.register(fastifyMongodb, {
-    url: process.env.MONGO_URL,
+    forceClose: true,
+    url: process.env.MONGO_URI,
 });
 
 //Endpoint - To get all the data
