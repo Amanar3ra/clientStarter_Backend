@@ -18,6 +18,10 @@ app.register(fastifyMongodb, {
 
 //Endpoint - To get all the data
 app.get('/', async (req, res) => {
+    if (!app.mongo.client) {
+        return res.status(500).send({ error: "Database connection not established!" });
+    }
+
     const collection = app.mongo.db.collection('Music');
     const music = await collection.find({}).toArray();
     res.send(music);
@@ -110,10 +114,8 @@ app.delete('/:musicId', async (req, res) => {
 
 const PORT = process.env.PORT || 3000; // Use Render’s provided PORT
 
-try {
-    await app.listen({ port: PORT, host: '0.0.0.0' }); // Bind to 0.0.0.0
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
-} catch (err) {
-    app.log.error(err);
-    process.exit(1);
-}
+app.listen({ port: PORT, host: '0.0.0.0' }).then(() =>{; // Bind to 0.0.0.0
+    console.log(`Server running on ${PORT}`);
+}).catch (err => {
+    console.log("Error starting server:", err)
+});
