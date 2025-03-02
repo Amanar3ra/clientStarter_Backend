@@ -108,6 +108,12 @@ app.delete('/:musicId', async (req, res) => {
 //     process.exit(1)
 // }
 
-app.listen({ port: process.env.PORT || 5000 }, () => {
-    console.log("Server running...");
-});
+const PORT = process.env.PORT || 3000; // Use Render’s provided PORT
+
+try {
+    await app.listen({ port: PORT, host: '0.0.0.0' }); // Bind to 0.0.0.0
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
+} catch (err) {
+    app.log.error(err);
+    process.exit(1);
+}
