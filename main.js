@@ -1,19 +1,15 @@
 import { ObjectID } from "bson";
 import Fastify from "fastify";
 import fastifyMongodb from "fastify-mongodb";
-import fastifyCors from '@fastify/cors';
+import dotenv from 'dotenv';
 import { putSongSchema, postSongSchema } from './validator.js'
 
 const app = Fastify();
+dotenv.config();
 
-//Connection with MongoDB
-app.register(fastifyCors, {
-    origin:"*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-});
 
 app.register(fastifyMongodb, {
-    url: process.env.MONGO_URL
+    url: process.env.MONGO_URI,
 });
 
 //Endpoint - To get all the data
@@ -114,7 +110,7 @@ app.delete('/:musicId', async (req, res) => {
 
 const PORT = process.env.PORT || 3000; // Use Render’s provided PORT
 
-app.listen({ port: PORT, host: '0.0.0.0' }).then(() =>{; // Bind to 0.0.0.0
+app.listen({ port: PORT, host: '0.0.0.0' }).then(() =>{ // Bind to 0.0.0.0
     console.log(`Server running on ${PORT}`);
 }).catch (err => {
     console.log("Error starting server:", err)
