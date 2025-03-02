@@ -1,0 +1,18 @@
+{
+  "name": "assignment2-restapi-amanar3ra",
+  "version": "1.0.0",
+  "description": "<img width=\"150px\" src=\"https://w0244079.github.io/nscc/nscc-jpeg.jpg\" >",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^5.2.1",
+    "fastify-mongodb": "^4.1.1",
+    "joi": "^17.13.3"
+  }
+}
