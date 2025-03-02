@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
         return res.status(500).send({ error: "Database connection not established!" });
     }
 
-    const collection = app.mongo.db.collection('Music');
+    const collection = app.mongo.db.collections('Music');
     const music = await collection.find({}).toArray();
     res.send(music);
 });
