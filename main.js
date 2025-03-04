@@ -1,6 +1,6 @@
 import { ObjectID } from "bson";
 import Fastify from "fastify";
-// import fastifyMongodb from "fastify-mongodb";
+import fastifyMongodb from "@fastify/mongodb";
 import dotenv from 'dotenv';
 import { putSongSchema, postSongSchema } from './validator.js'
 
@@ -8,7 +8,7 @@ const app = Fastify();
 dotenv.config();
 
 //
-app.register(require('@fastify/mongodb'), {
+app.register(fastifyMongodb, {
     forceClose: true,
     url: process.env.MONGO_URL,
 });
