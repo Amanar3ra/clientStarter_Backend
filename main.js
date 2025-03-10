@@ -2,6 +2,7 @@ import { ObjectID } from "bson";
 import Fastify from "fastify";
 import fastifyMongodb from "@fastify/mongodb";
 import dotenv from 'dotenv';
+import cors from 'cors';
 import { putSongSchema, postSongSchema } from './validator.js'
 
 const app = Fastify();
@@ -12,6 +13,10 @@ app.register(fastifyMongodb, {
     forceClose: true,
     url: process.env.MONGO_URL,
 });
+
+app.use(cors({
+    origin: 'https://67cf499aef623b2264aa7caf--mybooksdata.netlify.app'
+}));
 
 //Endpoint - To get all the data
 app.get('/', async (req, res) => {
