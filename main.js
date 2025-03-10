@@ -14,10 +14,6 @@ await app.register(fastifyCors, {
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
   });
 
-app.use(cors({
-    origin: 'https://67cf499aef623b2264aa7caf--mybooksdata.netlify.app'
-}));
-
 //Endpoint - To get all the data
 app.get('/', async (req, res) => {
     if (!app.mongo.client) {
