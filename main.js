@@ -8,6 +8,12 @@ import { putSongSchema, postSongSchema } from './validator.js'
 const app = Fastify();
 dotenv.config();
 
+//
+app.register(fastifyMongodb, {
+    forceClose: true,
+    url: process.env.MONGO_URL,
+});
+
 //Registering the cors plugin
 await app.register(fastifyCors, { 
     origin: 'https://67cf499aef623b2264aa7caf--mybooksdata.netlify.app',
