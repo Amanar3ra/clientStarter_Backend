@@ -47,10 +47,10 @@ const start = async () => {
       try {
         const id = req.params.id;
         const collection = app.mongo.db.collection('Music');
-        const music = await collection.findOne({ _id: new ObjectID(`${id}`) });
+        const music = await collection.findOne({ _id: new ObjectID(id) });
 
-        if (id) {
-          json.stringfy(music);
+        if (music) {
+          res.json(music);
         } else {
           res.status(404).send("Data not found");
         }
