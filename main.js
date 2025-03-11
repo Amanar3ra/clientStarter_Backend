@@ -45,7 +45,7 @@ const start = async () => {
     //Endpoint - To get specific data using object Id
     app.get('/:id', async (req, res) => {
       try {
-        const musicId = req.params.id;
+        const id = req.params.id;
         const collection = app.mongo.db.collection('Music');
         const music = await collection.findOne({ _id: new ObjectID(`${id}`) });
 
