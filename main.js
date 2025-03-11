@@ -18,7 +18,7 @@ const start = async () => {
     // Register the CORS plugin first
     await app.register(fastifyCors, { 
       origin: ['https://67cf499aef623b2264aa7caf--mybooksdata.netlify.app', 'https://mybooksdata.netlify.app'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
       credentials: true
     });
     
