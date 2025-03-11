@@ -78,17 +78,17 @@ const start = async () => {
     );
 
     //Endpoint - To update an existing song detail
-    app.put('/:musicId', putSongSchema, async (req, res) => {
+    app.put('/:id', putSongSchema, async (req, res) => {
       try {
         const collection = app.mongo.db.collection('Music');
-        const musicId = req.params.musicId;
+        const id = req.params.id;
         const { error, value } = putSongSchema.validate(req.body);
         if (error) {
           return res.status(400).send({ error: error.details[0].message });
         }
 
         const result = await collection.updateOne(
-          { _id: new ObjectID(musicId) },
+          { _id: new ObjectID(id) },
           { $set: value }
         );
 
@@ -103,12 +103,12 @@ const start = async () => {
     });
 
     //Endpoint - To delete one song detail
-    app.delete('/:musicId', async (req, res) => {
+    app.delete('/:id', async (req, res) => {
       try {
         const collection = app.mongo.db.collection('Music');
-        const musicId = req.params.musicId;
+        const id = req.params.musicId;
 
-        const result = await collection.deleteOne({ _id: new ObjectID(musicId) });
+        const result = await collection.deleteOne({ _id: new ObjectID(id) });
         if (result.deletedCount === 0) {
           res.status(404).send({ error: 'Song not found' });
         } else {
