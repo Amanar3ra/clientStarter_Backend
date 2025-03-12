@@ -44,7 +44,7 @@ const start = async () => {
     });
 
     //Endpoint - To get specific data using object Id
-    app.get(':id', async (req, res) => {
+    app.get('/:id', async (req, res) => {
       try {
         const id = req.params.id;
         const collection = app.mongo.db.collection('Music');
@@ -79,7 +79,7 @@ const start = async () => {
     );
 
     //Endpoint - To update an existing song detail
-    app.put(':id', putSongSchema, async (req, res) => {
+    app.put('/:id', putSongSchema, async (req, res) => {
       try {
         const collection = app.mongo.db.collection('Music');
         const id = req.params.id;
@@ -104,7 +104,7 @@ const start = async () => {
     });
 
     //Endpoint - To delete one song detail
-    app.delete(':id', async (req, res) => {
+    app.delete('/:id', async (req, res) => {
       try {
 
         console.log("ID:", req.params.id);
