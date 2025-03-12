@@ -46,7 +46,13 @@ const start = async () => {
     //Endpoint - To get specific data using object Id
     app.get('/:id', async (req, res) => {
       try {
+
+
         const id = req.params.id;
+        if (!ObjectId.isValid(id)) {
+          return res.status(400).json({ error: "Invalid ID format" });
+        }
+
         const collection = app.mongo.db.collection('Music');
         const music = await collection.findOne({ _id: new ObjectId(id) });
 
