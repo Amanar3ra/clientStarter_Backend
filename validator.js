@@ -18,5 +18,5 @@ export const postSongSchema = Joi.object({
     ratings: Joi.object({
       rym: Joi.number().required(),
       ranked: Joi.number().integer().required(),
-    }).required()
+    })
 });
