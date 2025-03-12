@@ -1,5 +1,6 @@
 import Joi from 'joi';
 export const putSongSchema = Joi.object({
+    id: Joi.number().integer(),
     title: Joi.string(),
     genre: Joi.string(),
     artist: Joi.string(),
@@ -11,6 +12,7 @@ export const putSongSchema = Joi.object({
 });
 
 export const postSongSchema = Joi.object({
+    id: Joi.number().integer().required(),
     title: Joi.string().required(),
     genre: Joi.string().required(),
     artist: Joi.string().required(),
