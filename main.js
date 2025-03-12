@@ -108,7 +108,9 @@ const start = async () => {
 
         console.log("ID:", req.params.id);
         const collection = app.mongo.db.collection('Music');
-        const id = req.params.id;
+        // const id = req.params.id;
+
+        const id = req.params.id.trim();
 
         const result = await collection.deleteOne({ _id: new ObjectId(id) });
         if (result.deletedCount === 0) {
