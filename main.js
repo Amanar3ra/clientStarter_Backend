@@ -1,4 +1,4 @@
-import { ObjectID } from "bson";
+import { ObjectId } from "bson";
 import Fastify from "fastify";
 import fastifyMongodb from "@fastify/mongodb";
 import dotenv from 'dotenv';
@@ -47,7 +47,7 @@ const start = async () => {
       try {
         const id = req.params.id;
         const collection = app.mongo.db.collection('Music');
-        const music = await collection.findOne({ _id: new ObjectID(id) });
+        const music = await collection.findOne({ _id: new ObjectId(id) });
 
         if (music) {
           res.json(music);
@@ -105,10 +105,12 @@ const start = async () => {
     //Endpoint - To delete one song detail
     app.delete('/:id', async (req, res) => {
       try {
+
+        console.log("ID:", req.params.id);
         const collection = app.mongo.db.collection('Music');
         const id = req.params.id;
 
-        const result = await collection.deleteOne({ _id: new ObjectID(id) });
+        const result = await collection.deleteOne({ _id: new ObjectId(id) });
         if (result.deletedCount === 0) {
           res.status(404).send({ error: 'Song not found' });
         } else {
