@@ -45,7 +45,7 @@ const start = async () => {
 
     //Endpoint - To get specific data using object Id
     app.get('/:id', async (req, res) => {
-      console.log(req.params.id)
+      // console.log(req.params.id)
       try {
         const id = req.params.id;
         if (!ObjectId.isValid(id)) {
@@ -54,10 +54,10 @@ const start = async () => {
 
         // console.log(id)
         const collection = app.mongo.db.collection('Music');
-        const music = await collection.find({ _id: new ObjectId(id) });
+        const music = await collection.findOne({ _id: new ObjectId(id) });
 
         if (music) {
-          res.json(music);
+          res.send(music);
         } else {
           res.status(404).send("Data not found");
         }
