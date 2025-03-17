@@ -1,4 +1,4 @@
-import { ObjectId } from "bson";
+import { ObjectID } from "bson";
 import Fastify from "fastify";
 import fastifyMongodb from "@fastify/mongodb";
 import dotenv from 'dotenv';
@@ -47,14 +47,14 @@ const start = async () => {
     app.get('/:id', async (req, res) => {
       // console.log(req.params.id)
       try {
-        const id = parseInt(req.params.id);
-        if (isNaN(id)) {
-          return res.status(400).json({ error: "Invalid ID format" });
-        }
+        const id = req.params.id;
+        // if (isNaN(id)) {
+        //   return res.status(400).json({ error: "Invalid ID format" });
+        // }
 
         // console.log(id)
         const collection = app.mongo.db.collection('Music');
-        const music = await collection.findOne({ id: id});
+        const music = await collection.findOne({ _id: new ObjectID(id)} );
 
         if (music) {
           res.send(music);
