@@ -12,7 +12,7 @@ export const putSongSchema = Joi.object({
 });
 
 export const postSongSchema = Joi.object({
-    id: Joi.number().integer().required(),
+    // id: Joi.number().integer().required(),
     title: Joi.string().required(),
     genre: Joi.string().required(),
     artist: Joi.string().required(),
