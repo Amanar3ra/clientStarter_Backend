@@ -1,4 +1,4 @@
-import { ObjectID } from "bson";
+import { ObjectId } from "bson";
 import Fastify from "fastify";
 import fastifyMongodb from "@fastify/mongodb";
 import dotenv from 'dotenv';
@@ -54,7 +54,7 @@ const start = async () => {
 
         // console.log(id)
         const collection = app.mongo.db.collection('Music');
-        const music = await collection.findOne({ _id: new ObjectID(id)} );
+        const music = await collection.findOne({ _id: new ObjectId(id)} );
 
         if (music) {
           res.send(music);
