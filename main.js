@@ -88,14 +88,14 @@ const start = async () => {
     app.put('/:id', putSongSchema, async (req, res) => {
       try {
         const collection = app.mongo.db.collection('Music');
-        const id = parseInt(req.params.id);
+        const id = req.params.id;
         const { error, value } = putSongSchema.validate(req.body);
         if (error) {
           return res.status(400).send({ error: error.details[0].message });
         }
 
         const result = await collection.updateOne(
-          { id: id },
+          {  _id: new ObjectId(id) },
           { $set: value }
         );
 
@@ -117,9 +117,9 @@ const start = async () => {
         const collection = app.mongo.db.collection('Music');
         // const id = req.params.id;
 
-        const id = parseInt(req.params.id);
+        const id = req.params.id;
 
-        const result = await collection.deleteOne({ id: id });
+        const result = await collection.deleteOne({  _id: new ObjectId(id) });
         if (result.deletedCount === 0) {
           res.status(404).send({ error: 'Song not found' });
         } else {
